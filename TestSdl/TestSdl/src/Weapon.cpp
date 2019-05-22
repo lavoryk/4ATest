@@ -15,7 +15,6 @@ Weapon::Weapon():
 		std::cout << "Start thread" << std::endl;
 		while (this->m_runing)
 		{
-			// std::this_thread::yield();
 			std::this_thread::sleep_for(std::chrono::milliseconds(1));
 			int x, y;
 			SDL_GetMouseState(&x, &y);
@@ -25,8 +24,18 @@ Weapon::Weapon():
 			if (state[SDL_SCANCODE_SPACE] && !m_didShoot)
 			{
 				m_didShoot = true;
-				// Dear reviwer 
-				BulletManager::GetInstance()->Fire(m_pos, m_dir, 1000, 2, 20);
+				// Dear reviwer, here is an entry point for your unit test
+				BulletManager::GetInstance()->Fire(
+					m_pos, // starting point of the bullet on the plane (in meters), left up screen corner is Origin
+					m_dir, // dir - direction, normalized vector
+					1000,  // bullet speed (m / s),
+					2,     // when the bullet will be fired,
+					5      // time before bullet disappears.
+				
+				// Move weapon by means of AWSD
+				// Aim to the target by means mouse
+				// Fire by means of SPACEBAR
+				);
 			}
 			else if (!state[SDL_SCANCODE_SPACE] && m_didShoot)
 			{
